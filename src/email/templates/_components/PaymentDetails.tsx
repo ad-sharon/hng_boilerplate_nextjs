@@ -1,9 +1,33 @@
 import { Column, Row, Section, Text } from "@react-email/components";
 import React from "react";
 
-import TailwindWrapper from "./tailwindWrapper";
+import CustomButton from "~/components/common/Button/button";
+import TailwindWrapper from "~/email/templates/_components/tailwindWrapper";
 
-const PaymentDetails: React.FC = () => {
+export interface PaymentDetailsProperties {
+  amount: string;
+  paymentMethod: string;
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+}
+
+export interface PayNowLink {
+  payNowLink: string;
+}
+
+export interface PaymentDetailsProperties_
+  extends PaymentDetailsProperties,
+    PayNowLink {}
+
+const PaymentDetails: React.FC<PaymentDetailsProperties_> = ({
+  amount,
+  paymentMethod,
+  bankName,
+  accountNumber,
+  accountName,
+  payNowLink,
+}) => {
   return (
     <TailwindWrapper>
       <Section className="mt-[26px]">
@@ -27,21 +51,10 @@ const PaymentDetails: React.FC = () => {
         </Row>
 
         {/* 1st row */}
-        <Section className="w-full rounded-[8px] bg-[#F6F8FB] px-[24px]">
-          <Row
-            style={{
-              borderBottom: "1px solid",
-              borderColor: "var(--border)",
-            }}
-            className="w-full"
-          >
+        <Section className="w-full rounded-[8px] bg-primary px-[24px]">
+          <Row className="w-full border-border">
             <Column>
-              <Text
-                style={{
-                  color: "var(--foreground)",
-                }}
-                className="text-[16px] font-normal leading-[19.36px]"
-              >
+              <Text className="text-[16px] font-normal leading-[19.36px] text-foreground">
                 Amount
               </Text>
             </Column>
@@ -51,7 +64,7 @@ const PaymentDetails: React.FC = () => {
                 style={{}}
                 className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]"
               >
-                $352
+                {amount}
               </Text>
             </Column>
           </Row>
@@ -68,7 +81,7 @@ const PaymentDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                Bank
+                {paymentMethod}
               </Text>
             </Column>
           </Row>
@@ -85,7 +98,7 @@ const PaymentDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                United Bank of Africa
+                {bankName}
               </Text>
             </Column>
           </Row>
@@ -102,7 +115,7 @@ const PaymentDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                2108689490
+                {accountNumber}
               </Text>
             </Column>
           </Row>
@@ -119,9 +132,47 @@ const PaymentDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                John Doe
+                {accountName}
               </Text>
             </Column>
+          </Row>
+
+          <Row className="mt-[56px] w-full">
+            <Column className="flex w-full items-center justify-center">
+              <div className="flex items-center gap-4">
+                <CustomButton variant="primary" href={payNowLink}>
+                  Pay Now
+                </CustomButton>
+              </div>
+            </Column>
+          </Row>
+
+          <Row className="mt-[56px] w-full">
+            <Row>
+              <Column>
+                <Text className="font-sans text-[18px] font-semibold">
+                  Have any questions about your order?
+                </Text>
+              </Column>
+            </Row>
+
+            <Row>
+              <Column>
+                <Text className="font-sans text-[16px] font-normal">
+                  Give us a call at (+234)-456-7890 or Email us at
+                  support@llaihng.com
+                </Text>
+              </Column>
+            </Row>
+
+            <Row className="mt-[56px]">
+              <Column>
+                <Text className="font-sans text-[18px] font-semibold">
+                  Regards,
+                  <Text>Boilerplate</Text>
+                </Text>
+              </Column>
+            </Row>
           </Row>
         </Section>
       </Section>

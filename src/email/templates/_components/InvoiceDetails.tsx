@@ -1,9 +1,19 @@
 import { Column, Row, Section, Text } from "@react-email/components";
 import React from "react";
 
-import TailwindWrapper from "./tailwindWrapper";
+import TailwindWrapper from "~/email/templates/_components/tailwindWrapper";
 
-const InvoiceDetails: React.FC = () => {
+export interface InvoiceDetailsProperties {
+  invoiceNumber: string;
+  issuedDate: string;
+  dueDate: string;
+}
+
+const InvoiceDetails: React.FC<InvoiceDetailsProperties> = ({
+  invoiceNumber,
+  issuedDate,
+  dueDate,
+}) => {
   return (
     <TailwindWrapper>
       <Section className="mt-[56px]">
@@ -25,7 +35,7 @@ const InvoiceDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                #EJ7B8465
+                {invoiceNumber}
               </Text>
             </Column>
           </Row>
@@ -39,7 +49,7 @@ const InvoiceDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                July 17, 2024
+                {issuedDate}
               </Text>
             </Column>
           </Row>
@@ -53,7 +63,7 @@ const InvoiceDetails: React.FC = () => {
             </Column>
             <Column className="text-right">
               <Text className="color-#0A0A0A whitespace-nowrap font-sans text-[16px] font-semibold leading-[19.36px]">
-                July 19, 2024
+                {dueDate}
               </Text>
             </Column>
           </Row>

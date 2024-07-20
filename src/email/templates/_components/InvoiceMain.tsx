@@ -1,36 +1,40 @@
 import { Column, Img, Row, Section, Text } from "@react-email/components";
 import React from "react";
 
-import TailwindWrapper from "./tailwindWrapper";
+import TailwindWrapper from "~/email/templates/_components/tailwindWrapper";
 
-const InvoiceMain: React.FC = () => {
+export interface InvoiceMainProperties {
+  name: string;
+  title: string;
+  image: string;
+}
+
+const InvoiceMain: React.FC<InvoiceMainProperties> = ({
+  name,
+  title,
+  image,
+}) => {
   return (
     <TailwindWrapper>
       <Section>
-        {/* first image */}
         <Row className="h-[178px] w-full">
           <Column className="flex w-full items-center justify-center">
-            <Img
-              src="/images/invoicePic.jpg"
-              alt=""
-              className="h-[178px] w-[178px]"
-            />
+            <Img src={image} alt="invoicePic" className="h-[178px] w-[178px]" />
           </Column>
         </Row>
 
         <Row className="mt-[56px] w-full">
           <Column className="flex w-full items-center justify-center">
-            <Text className="text-center font-sans text-[24px] font-semibold">
-              Invoice
+            <Text className="text-center text-[24px] font-semibold leading-[29.05px] text-background">
+              {title}
             </Text>
           </Column>
         </Row>
 
         <Row className="mt-[56px] w-full">
-          {/* Name */}
           <Column className="h-[22px] w-full">
             <Text className="font-sans text-[18px] font-semibold">
-              Hi John Doe,
+              Hi {name},
             </Text>
           </Column>
         </Row>
